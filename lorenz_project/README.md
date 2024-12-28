@@ -24,7 +24,7 @@ EQUATION DE LORENZ (3D):
 5) Après avoir fait l'étape précédente Ecrivez gnuplot dans le terminal puis appuyer sur ENTRER
 6) Après que gnuplot se soit lancer taper ces deux commandes dans le terminal : 
 set parametric
-splot "output/lorenz.dat" using 2:3:4
+splot "output/simulation.dat" using 2:3:4
 
 puis appuyez sur ENTRER
 
@@ -46,10 +46,10 @@ OSCILLATEUR ET EQUATION DE VAN DER POL (2D):
 
 5) Après avoir fait l'étape précédente Ecrivez gnuplot dans le terminal puis appuyer sur ENTRER
 6) Après que gnuplot se soit lancer taper cette commande dans le terminal pour les equations de Van_der_pol : 
-plot "output/van_der_pol.dat" using 1:2 with lines
+plot "output/simulation.dat" using 1:2 with lines
 
 6 bis) Après que gnuplot se soit lancer taper cette commande dans le terminal pour les oscillations : 
-plot "output/oscillator.dat" using 1:2 with lines
+plot "output/simulation.dat" using 1:2 with lines
 
 puis appuyez sur ENTRER
 
