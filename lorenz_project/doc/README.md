@@ -26,7 +26,14 @@ set parametric
 splot "test/simulation.dat" using 2:3:4
 
 7) pour obtenir la courbe de la vitesse de mise à jour par rapport au "speed_factor", veuillez entrez ces commandes dans le terminal : 
-gnuplot -e "plot 'test/simulation.dat' using 1:2 with lines title 'x', '' using 1:3 with lines title 'y', '' using 1:4 with lines title 'z'"
+gnuplot -e "
+    set title 'Dynamique du système'
+    set xlabel 'Temps (t)'
+    set ylabel 'Position'
+    plot 'test/simulation.dat' using 1:2 with lines title 'x', \
+         'test/simulation.dat' using 1:3 with lines title 'y', \
+         'test/simulation.dat' using 1:4 with lines title 'z'
+"
 
 puis appuyez sur ENTRER
 
