@@ -5,26 +5,46 @@
 #include "van_der_pol.h"
 #include "oscillator.h"
 
-
 void write_coordinates(FILE *file, double t, double x, double y, double z) {
     fprintf(file, "%lf %lf %lf %lf\n", t, x, y, z);
 }
 
-
 int main() {
+    struct LorenzParams *lorenz_params = (struct LorenzParams *)malloc(sizeof(struct LorenzParams));
+    struct VanDerPolParams *van_der_pol_params = (struct VanDerPolParams *)malloc(sizeof(struct VanDerPolParams));
+    struct OscillatorParams *oscillator_params = (struct OscillatorParams *)malloc(sizeof(struct OscillatorParams));
 
-    struct LorenzParams lorenz_params;
-    struct VanDerPolParams van_der_pol_params;
-    struct OscillatorParams oscillator_params;
+    if (!lorenz_params || !van_der_pol_params || !oscillator_params) {
+        fprintf(stderr, "Erreur d'allocation mémoire.\n");
+        return EXIT_FAILURE;
+    }
 
-    struct DynamicSystem systems[] = {
-        {"Équations de Lorenz", initialise_lorenz, actualise_lorenz, &lorenz_params},
-        {"Van der Pol", initialise_van_der_pol, actualise_van_der_pol, &van_der_pol_params},
-        {"Oscillateur Harmonique", initialise_oscillator, actualise_oscillator, &oscillator_params}
-    };
+    struct DynamicSystem *systems = (struct DynamicSystem *)malloc(3 * sizeof(struct DynamicSystem));
+    if (!systems) {
+        fprintf(stderr, "Erreur d'allocation mémoire.\n");
+        free(lorenz_params);
+        free(van_der_pol_params);
+        free(oscillator_params);
+        return EXIT_FAILURE;
+    }
 
-    int num_systems = sizeof(systems) / sizeof(struct DynamicSystem);
+    // Initialisation des systèmes
+    systems[0].name = "Équations de Lorenz";
+    systems[0].init_params = initialise_lorenz;
+    systems[0].update = actualise_lorenz;
+    systems[0].params = lorenz_params;
 
+    systems[1].name = "Van der Pol";
+    systems[1].init_params = initialise_van_der_pol;
+    systems[1].update = actualise_van_der_pol;
+    systems[1].params = van_der_pol_params;
+
+    systems[2].name = "Oscillateur Harmonique";
+    systems[2].init_params = initialise_oscillator;
+    systems[2].update = actualise_oscillator;
+    systems[2].params = oscillator_params;
+
+    int num_systems = 3;
 
     printf("Choisissez un système dynamique :\n");
     for (int i = 0; i < num_systems; i++) {
@@ -36,6 +56,10 @@ int main() {
 
     if (choice < 1 || choice > num_systems) {
         printf("Choix invalide.\n");
+        free(lorenz_params);
+        free(van_der_pol_params);
+        free(oscillator_params);
+        free(systems);
         return EXIT_FAILURE;
     }
 
@@ -52,24 +76,33 @@ int main() {
     printf("Entrez le temps maximal t_max : ");
     scanf("%lf", &t_max);
 
-
     int steps = (int)(t_max / dt);
-    FILE * data_file = fopen("test/simulation.dat", "w");
+    FILE *output_file = fopen("output/simulation.dat", "w");
 
-    if (!data_file) {
-        fprintf(stderr, "Erreur dans le code ");
+    if (!output_file) {
+        fprintf(stderr, "Erreur : impossible de créer le fichier de sortie.\n");
+        free(lorenz_params);
+        free(van_der_pol_params);
+        free(oscillator_params);
+        free(systems);
         return EXIT_FAILURE;
     }
 
     double t = 0.0;
     for (int i = 0; i <= steps; i++) {
-        fprintf(data_file, "%lf %lf %lf %lf\n", t, x, y, z);
+        write_coordinates(output_file, t, x, y, z);
         system->update(system->params, &x, &y, &z, dt);
         t += dt;
     }
 
-    fclose(data_file);
-    printf("Simulation terminée. Résultats dans 'test/simulation.dat'.\n");
+    fclose(output_file);
+    printf("Simulation terminée. Résultats dans 'output/simulation.dat'.\n");
+
+    // Libération de la mémoire
+    free(lorenz_params);
+    free(van_der_pol_params);
+    free(oscillator_params);
+    free(systems);
 
     return 0;
 }
