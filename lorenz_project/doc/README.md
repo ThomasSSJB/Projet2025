@@ -50,6 +50,8 @@ splot 'test/simulation.dat' using 2:3:4:8 with points palette title 'Magnitude d
 3) Si vous voulez le temps par un changement de couleur :
 Tapez cette commande dans le terminal :
 splot 'test/simulation.dat' using 2:3:4:1 with points palette title 'Temps'
+
+
 Puis Appuyez sur ENTRER
 
 
@@ -101,6 +103,7 @@ splot 'test/simulation.dat' using 2:3:4:8 with points palette title 'Magnitude d
 3) Si vous voulez le temps par un changement de couleur :
 Tapez cette commande dans le terminal :
 splot 'test/simulation.dat' using 2:3:4:1 with points palette title 'Temps'
+
 Puis Appuyez sur ENTRER
 
 
