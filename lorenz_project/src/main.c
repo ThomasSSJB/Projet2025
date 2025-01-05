@@ -101,7 +101,7 @@ int main() {
         double vitesse = sqrt(dx*dx + dy*dy + dz*dz);
 
        
-        fprintf(data_file, "%lf %lf %lf %lf %lf\n", t, x, y, z, vitesse);
+        fprintf(data_file, "%lf %lf %lf %lf %lf %lf %lf %lf\n", t, x, y, z, dx, dy, dz, vitesse);
 
         
         prev_x = x;
