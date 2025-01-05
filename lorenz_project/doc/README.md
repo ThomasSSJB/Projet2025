@@ -51,6 +51,46 @@ gnuplot -e "
 
 puis appuyez sur ENTRER
 
+8) Au choix si vous voulez :
+1) la vitesse par des vecteurs :
+tapez cette commande dans le terminal :
+gnuplot -e "
+    set title 'Vecteurs de Vitesse'
+    set xlabel 'Temps (t)'
+    set ylabel 'Position'
+    plot 'test/simulation.dat' using 1:2:5 with vectors title 'Vitesse (x)', \
+         'test/simulation.dat' using 1:3:5 with vectors title 'Vitesse (y)', \
+         'test/simulation.dat' using 1:4:5 with vectors title 'Vitesse (z)'
+"
+2) Si vous voulez la vitesse par une couleur :
+tapez cette commande dans le terminal :
+gnuplot -e "
+    set title 'Vitesse par couleur'
+    set xlabel 'Temps (t)'
+    set ylabel 'Position'
+    set palette defined (0 'blue', 1 'red')  # Palette de couleurs
+    plot 'test/simulation.dat' using 1:2:5 with lines lc palette title 'x', \
+         'test/simulation.dat' using 1:3:5 with lines lc palette title 'y', \
+         'test/simulation.dat' using 1:4:5 with lines lc palette title 'z'
+"
+3) Si vous voulez le temps par un changement de couleur :
+Tapez cette commande dans le terminal :
+gnuplot -e "
+    set title 'Temps par couleur'
+    set xlabel 'Temps (t)'
+    set ylabel 'Position'
+    set palette defined (0 'blue', 1 'red')  # Palette de couleurs
+    plot 'test/simulation.dat' using 1:2 with lines lc palette title 'x', \
+         'test/simulation.dat' using 1:3 with lines lc palette title 'y', \
+         'test/simulation.dat' using 1:4 with lines lc palette title 'z'
+   "
+Puis Appuyez sur ENTRER
+
+
+
+
+
+
 
 
 OSCILLATEUR ET EQUATION DE VAN DER POL (2D):
@@ -85,7 +125,40 @@ gnuplot -e "
 
 puis appuyez sur ENTRER
 
-
+8) Au choix si vous voulez :
+1) la vitesse par des vecteurs :
+tapez cette commande dans le terminal :
+gnuplot -e "
+    set title 'Vecteurs de Vitesse'
+    set xlabel 'Temps (t)'
+    set ylabel 'Position'
+    plot 'test/simulation.dat' using 1:2:5 with vectors title 'Vitesse (x)', \
+         'test/simulation.dat' using 1:3:5 with vectors title 'Vitesse (y)', \
+         'test/simulation.dat' using 1:4:5 with vectors title 'Vitesse (z)'
+"
+2) Si vous voulez la vitesse par une couleur :
+tapez cette commande dans le terminal :
+gnuplot -e "
+    set title 'Vitesse par couleur'
+    set xlabel 'Temps (t)'
+    set ylabel 'Position'
+    set palette defined (0 'blue', 1 'red')  # Palette de couleurs
+    plot 'test/simulation.dat' using 1:2:5 with lines lc palette title 'x', \
+         'test/simulation.dat' using 1:3:5 with lines lc palette title 'y', \
+         'test/simulation.dat' using 1:4:5 with lines lc palette title 'z'
+"
+3) Si vous voulez le temps par un changement de couleur :
+Tapez cette commande dans le terminal :
+gnuplot -e "
+    set title 'Temps par couleur'
+    set xlabel 'Temps (t)'
+    set ylabel 'Position'
+    set palette defined (0 'blue', 1 'red')  # Palette de couleurs
+    plot 'test/simulation.dat' using 1:2 with lines lc palette title 'x', \
+         'test/simulation.dat' using 1:3 with lines lc palette title 'y', \
+         'test/simulation.dat' using 1:4 with lines lc palette title 'z'
+   "
+Puis Appuyez sur ENTRER
 
 
 
