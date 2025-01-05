@@ -1,6 +1,6 @@
 EXEC = bin/prog
-SRC = src/main.c src/lorenz.c src/oscillator.c src/van_der_pol.c src/dynamic_system.h
-OBJ = lib/main.o lib/lorenz.o lib/oscillator.o lib/van_der_pol.o lib/dynamic_system.o
+SRC = src/main.c src/lorenz.c src/oscillator.c src/van_der_pol.c
+OBJ = lib/main.o lib/lorenz.o lib/oscillator.o lib/van_der_pol.o
 FLAGS = -Wall -ggdb -Iinclude
 
 all: $(EXEC)
