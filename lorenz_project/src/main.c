@@ -5,9 +5,6 @@
 #include "van_der_pol.h"
 #include "oscillator.h"
 
-void write_coordinates(FILE *file, double t, double x, double y, double z) {
-    fprintf(file, "%lf %lf %lf %lf\n", t, x, y, z);
-}
 
 int main() {
     struct LorenzParams *lorenz_params = (struct LorenzParams *)malloc(sizeof(struct LorenzParams));
@@ -77,9 +74,9 @@ int main() {
     scanf("%lf", &t_max);
 
     int steps = (int)(t_max / dt);
-    FILE *output_file = fopen("output/simulation.dat", "w");
+    FILE *data_file = fopen("test/simulation.dat", "w");
 
-    if (!output_file) {
+    if (!data_file) {
         fprintf(stderr, "Erreur : impossible de créer le fichier de sortie.\n");
         free(lorenz_params);
         free(van_der_pol_params);
@@ -90,13 +87,13 @@ int main() {
 
     double t = 0.0;
     for (int i = 0; i <= steps; i++) {
-        write_coordinates(output_file, t, x, y, z);
+        fprintf(data_file, "%lf %lf %lf %lf\n", t, x, y, z);
         system->update(system->params, &x, &y, &z, dt);
         t += dt;
     }
 
-    fclose(output_file);
-    printf("Simulation terminée. Résultats dans 'output/simulation.dat'.\n");
+    fclose(data_file);
+    printf("Simulation terminée. Résultats dans 'test/simulation.dat'.\n");
 
     // Libération de la mémoire
     free(lorenz_params);
