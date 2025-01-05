@@ -1,9 +1,9 @@
-#include "lorenz.h"
-#include "stdio.h"
+#include "../include/lorenz.h"
+#include <stdio.h>
 
 void initialise_lorenz(void *params){
-    LorenzParams *p = (LorenzParams *)params;
-     printf("Entrez les paramètres pour les équations de Lorenz :\n");
+    struct LorenzParams *p = (struct LorenzParams *)params;
+    printf("Entrez les paramètres pour les équations de Lorenz :\n");
     printf("σ (sigma) : ");
     scanf("%lf", &p->sigma);
 
@@ -15,7 +15,7 @@ void initialise_lorenz(void *params){
 }
 
 void actualise_lorenz(void *params, double *x, double *y, double *z, double dt){
-    LorenzParams *p = (LorenzParams *)params;
+    struct LorenzParams *p = (struct LorenzParams *)params;
     double dx = p->sigma * (*y - *x);
     double dy = *x * (p->rho - *z) - *y;
     double dz = *x * *y - p->beta * *z;

@@ -1,10 +1,11 @@
 #ifndef VAN_DER_POL_H
 #define VAN_DER_POL_H
+
 #include "dynamic_system.h"
 
-typedef struct {
+struct VanDerPolParams {
     double mu;
-} VanDerPolParams;
+} ;
 
 void initialise_van_der_pol(void *params);
 

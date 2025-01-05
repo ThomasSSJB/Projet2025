@@ -3,14 +3,14 @@
 
 #include "dynamic_system.h"
 
-typedef struct{
+struct LorenzParams{
     double sigma;
     double rho;
     double beta;
-}LorenzParams;
+};
 
 
-void initialise_lorenz(void *params);
+void initialise_lorenz() ;
 
 void actualise_lorenz(void *params, double *x, double *y, double *z, double dt);
 

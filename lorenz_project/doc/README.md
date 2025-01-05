@@ -15,16 +15,15 @@ EQUATION DE LORENZ (3D):
 3) Lorsque vous avez effectué(e) les étapes précédentes, Ecrivez make run dans votre terminal appuyez sur ENTRER pour valider l'execution
 
 4) Lorsque votre programme est executé : Choisissez les equations de Lorenz en tapant 1 dans le terminal et en appuyant sur ENTRER :
-- a) Entrez les trois valeur "position initiale" de votre equation de lorentz en x,y,z puis appuyer sur ENTRER
-- b) Entrez les 3 paramètres de votre equation sigma,rho,béta puis appuyer sur ENTRER
+- a) Entrez les 3 paramètres de votre equation sigma,rho,béta puis appuyer sur ENTRER
+- b) Entrez les trois valeur "position initiale" de votre equation de lorenz en x,y,z puis appuyer sur ENTRER
 - c) Entrez votre increment de temps dt puis appuyer sur ENTRER
-
 - d) Entrez le temps maximal t_max puis appuyer sur ENTRER
 
 5) Après avoir fait l'étape précédente Ecrivez gnuplot dans le terminal puis appuyer sur ENTRER
 6) Après que gnuplot se soit lancer taper ces deux commandes dans le terminal : 
 set parametric
-splot "output/simulation.dat" using 2:3:4
+splot "test/simulation.dat" using 2:3:4
 
 puis appuyez sur ENTRER
 
@@ -37,19 +36,15 @@ OSCILLATEUR ET EQUATION DE VAN DER POL (2D):
 3) Lorsque vous avez effectué(e) les étapes précédentes, Ecrivez make run dans votre terminal appuyez sur ENTRER pour valider l'execution
 
 4) Lorsque votre programme est executé : Choisissez soit les equations de van der pol en tapant 2 soit les oscillations en tapant 3 :
-- a) Entrez les trois valeur "position initiale" de votre choix en x,y,z (avec z inactif) puis appuyer sur ENTRER
-- b) Entrez le paramètre de votre equation puis appuyer sur ENTRER
-
+- a) Entrez le paramètre de votre equation puis appuyer sur ENTRER
+- b) Entrez les trois valeur "position initiale" de votre choix en x,y,z (avec z inactif) puis appuyer sur ENTRER
 - c) Entrez votre increment de temps dt puis appuyer sur ENTRER
-
 - d) Entrez le temps maximal t_max puis appuyer sur ENTRER
 
 5) Après avoir fait l'étape précédente Ecrivez gnuplot dans le terminal puis appuyer sur ENTRER
-6) Après que gnuplot se soit lancer taper cette commande dans le terminal pour les equations de Van_der_pol : 
-plot "output/simulation.dat" using 1:2 with lines
+6) Après que gnuplot se soit lancer taper cette commande dans le terminal : 
 
-6 bis) Après que gnuplot se soit lancer taper cette commande dans le terminal pour les oscillations : 
-plot "output/simulation.dat" using 1:2 with lines
+plot "test/simulation.dat" using 1:2 with lines
 
 puis appuyez sur ENTRER
 

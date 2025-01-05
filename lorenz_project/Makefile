@@ -1,25 +1,17 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -std=c11
-LDFLAGS =
-SRC = src/main.c src/lorenz.c src/oscillator.c src/van_der_pol.c src/file_io.c
-OBJ = $(SRC:.c=.o)
-TARGET = lorenz
+EXEC = bin/prog
+SRC = src/main.c src/lorenz.c src/oscillator.c src/van_der_pol.c src/dynamic_system.h
+OBJ = lib/main.o lib/lorenz.o lib/oscillator.o lib/van_der_pol.o lib/dynamic_system.o
+FLAGS = -Wall -ggdb -Iinclude
 
+all: $(EXEC)
 
-all: $(TARGET)
+$(EXEC): $(OBJ)
+	gcc $^ -o $@ $(FLAGS)
+	@echo "Exécutable généré : $(EXEC)"
 
-
-$(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
-
-
-src/%.o: src/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
+lib/%.o: src/%.c
+	gcc -c $< -o $@ $(FLAGS)
+	@echo "Compilation : $< -> $@"
 
 run: all
-	./$(TARGET)
-
-
-clean:
-	rm -f $(OBJ) $(TARGET)
+	./$(EXEC)

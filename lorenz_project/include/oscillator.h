@@ -3,9 +3,9 @@
 
 #include "dynamic_system.h"
 
-typedef struct {
+struct OscillatorParams {
     double omega;
-} OscillatorParams;
+} ;
 
 void initialise_oscillator(void *params);
 
