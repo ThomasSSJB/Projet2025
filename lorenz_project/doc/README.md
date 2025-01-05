@@ -1,4 +1,4 @@
-                        Comment utiliser notre application ?
+                       Comment utiliser notre application ?
                         
 Ce tutoriel vous guidera sur l'utilisation de notre application lorenz_project.
                         
@@ -25,6 +25,9 @@ EQUATION DE LORENZ (3D):
 set parametric
 splot "test/simulation.dat" using 2:3:4
 
+7) pour obtenir la courbe de la vitesse de mise à jour par rapport au "speed_factor", veuillez entrez ces commandes dans le terminal : 
+gnuplot -e "plot 'test/simulation.dat' using 1:2 with lines title 'x', '' using 1:3 with lines title 'y', '' using 1:4 with lines title 'z'"
+
 puis appuyez sur ENTRER
 
 
@@ -47,6 +50,10 @@ OSCILLATEUR ET EQUATION DE VAN DER POL (2D):
 plot "test/simulation.dat" using 1:2 with lines
 
 puis appuyez sur ENTRER
+
+7) pour obtenir la courbe de la vitesse de mise à jour par rapport au "speed_factor", veuillez entrez ces commandes dans le terminal : 
+gnuplot -e "plot 'test/simulation.dat' using 1:2 with lines title 'x', '' using 1:3 with lines title 'y', '' using 1:4 with lines title 'z'"
+
 
 
 
