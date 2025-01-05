@@ -42,7 +42,7 @@ puis appuyez sur ENTRER
 
 8) Si vous voulez le temps par un changement de couleur :
 Tapez cette commande dans le terminal :
-splot 'test/simulation.dat' using 2:3:4:1 with points palette title 'Temps'
+splot 'test/simulation.dat' using 2:3:4:1 with lines palette title 'Temps'
 
 
 Puis Appuyez sur ENTRER
@@ -88,7 +88,7 @@ puis appuyez sur ENTRER
 
 8) Si vous voulez le temps par un changement de couleur :
 Tapez cette commande dans le terminal :
-splot 'test/simulation.dat' using 2:3:4:1 with points palette title 'Temps'
+plot 'test/simulation.dat' using 2:3:4:1 with points palette title 'Temps'
 
 Puis Appuyez sur ENTRER
 
