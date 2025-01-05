@@ -40,14 +40,7 @@ gnuplot -e "
 
 puis appuyez sur ENTRER
 
-8) Au choix si vous voulez :
-1) la vitesse par des vecteurs :
-tapez cette commande dans le terminal :
-splot 'test/simulation.dat' using 2:3:4:5:6:7 with vectors title 'Vitesse'
-2) Si vous voulez la vitesse par une couleur :
-tapez cette commande dans le terminal :
-splot 'test/simulation.dat' using 2:3:4:8 with points palette title 'Magnitude de la Vitesse'
-3) Si vous voulez le temps par un changement de couleur :
+8) Si vous voulez le temps par un changement de couleur :
 Tapez cette commande dans le terminal :
 splot 'test/simulation.dat' using 2:3:4:1 with points palette title 'Temps'
 
@@ -93,14 +86,7 @@ gnuplot -e "
 
 puis appuyez sur ENTRER
 
-8) Au choix si vous voulez :
-1) la vitesse par des vecteurs :
-tapez cette commande dans le terminal :
-splot 'test/simulation.dat' using 2:3:4:5:6:7 with vectors title 'Vitesse'
-2) Si vous voulez la vitesse par une couleur :
-tapez cette commande dans le terminal :
-splot 'test/simulation.dat' using 2:3:4:8 with points palette title 'Magnitude de la Vitesse'
-3) Si vous voulez le temps par un changement de couleur :
+8) Si vous voulez le temps par un changement de couleur :
 Tapez cette commande dans le terminal :
 splot 'test/simulation.dat' using 2:3:4:1 with points palette title 'Temps'
 
