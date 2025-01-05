@@ -5,8 +5,8 @@
 #include "van_der_pol.h"
 #include "oscillator.h"
 
-
 int main() {
+    
     struct LorenzParams *lorenz_params = (struct LorenzParams *)malloc(sizeof(struct LorenzParams));
     struct VanDerPolParams *van_der_pol_params = (struct VanDerPolParams *)malloc(sizeof(struct VanDerPolParams));
     struct OscillatorParams *oscillator_params = (struct OscillatorParams *)malloc(sizeof(struct OscillatorParams));
@@ -25,7 +25,7 @@ int main() {
         return EXIT_FAILURE;
     }
 
-    // Initialisation des systèmes
+    
     systems[0].name = "Équations de Lorenz";
     systems[0].init_params = initialise_lorenz;
     systems[0].update = actualise_lorenz;
@@ -43,6 +43,7 @@ int main() {
 
     int num_systems = 3;
 
+    
     printf("Choisissez un système dynamique :\n");
     for (int i = 0; i < num_systems; i++) {
         printf("%d. %s\n", i + 1, systems[i].name);
@@ -63,7 +64,8 @@ int main() {
     struct DynamicSystem *system = &systems[choice - 1];
     system->init_params(system->params);
 
-    double x, y, z, dt, t_max;
+    
+    double x, y, z, dt, t_max, speed_factor;
     printf("Entrez la position initiale (x y z) : ");
     scanf("%lf %lf %lf", &x, &y, &z);
 
@@ -73,9 +75,17 @@ int main() {
     printf("Entrez le temps maximal t_max : ");
     scanf("%lf", &t_max);
 
-    int steps = (int)(t_max / dt);
-    FILE *data_file = fopen("test/simulation.dat", "w");
+   
+    printf("Entrez un facteur de vitesse de mise à jour (1 = normal, >1 pour accélérer, <1 pour ralentir) : ");
+    scanf("%lf", &speed_factor);
 
+    
+    dt *= speed_factor;
+
+    int steps = (int)(t_max / dt);
+
+   
+    FILE *data_file = fopen("test/simulation.dat", "w");
     if (!data_file) {
         fprintf(stderr, "Erreur : impossible de créer le fichier de sortie.\n");
         free(lorenz_params);
@@ -85,6 +95,7 @@ int main() {
         return EXIT_FAILURE;
     }
 
+  
     double t = 0.0;
     for (int i = 0; i <= steps; i++) {
         fprintf(data_file, "%lf %lf %lf %lf\n", t, x, y, z);
@@ -95,7 +106,7 @@ int main() {
     fclose(data_file);
     printf("Simulation terminée. Résultats dans 'test/simulation.dat'.\n");
 
-    // Libération de la mémoire
+    
     free(lorenz_params);
     free(van_der_pol_params);
     free(oscillator_params);
