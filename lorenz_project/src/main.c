@@ -85,7 +85,7 @@ int main() {
         free(systems);
         return EXIT_FAILURE;
     }
-
+    fprintf(data_file, "# t x y z dx dy dz vitesse\n");
     double t = 0.0, prev_x = x, prev_y = y, prev_z = z;
 
     
