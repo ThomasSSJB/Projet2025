@@ -7,15 +7,18 @@
 #include "oscillator.h"
 
 int main() {
+    //étape "a" du doc
     struct LorenzParams *lorenz_params = (struct LorenzParams *)malloc(sizeof(struct LorenzParams));
     struct VanDerPolParams *van_der_pol_params = (struct VanDerPolParams *)malloc(sizeof(struct VanDerPolParams));
     struct OscillatorParams *oscillator_params = (struct OscillatorParams *)malloc(sizeof(struct OscillatorParams));
 
+    // etape "b" du doc
     if (!lorenz_params || !van_der_pol_params || !oscillator_params) {
         fprintf(stderr, "Erreur d'allocation mémoire.\n");
         return EXIT_FAILURE;
     }
 
+    // etape "c"
     struct DynamicSystem *systems = (struct DynamicSystem *)malloc(3 * sizeof(struct DynamicSystem));
     if (!systems) {
         fprintf(stderr, "Erreur d'allocation mémoire.\n");
@@ -25,7 +28,7 @@ int main() {
         return EXIT_FAILURE;
     }
 
-    
+    // etape "d"
     systems[0].name = "Équations de Lorenz";
     systems[0].init_params = initialise_lorenz;
     systems[0].update = actualise_lorenz;
@@ -43,7 +46,7 @@ int main() {
 
     int num_systems = 3;
 
-    
+    // etape "e"
     printf("Choisissez un système dynamique :\n");
     for (int i = 0; i < num_systems; i++) {
         printf("%d. %s\n", i + 1, systems[i].name);
@@ -52,6 +55,7 @@ int main() {
     int choice;
     scanf("%d", &choice);
 
+    // etape "f"
     if (choice < 1 || choice > num_systems) {
         printf("Choix invalide.\n");
         free(lorenz_params);
@@ -61,10 +65,13 @@ int main() {
         return EXIT_FAILURE;
     }
 
+    // etape "g"
     struct DynamicSystem *system = &systems[choice - 1];
     system->init_params(system->params);
 
     double x, y, z, dt, t_max;
+
+    //etape "h"
     printf("Entrez la position initiale (x y z) : ");
     scanf("%lf %lf %lf", &x, &y, &z);
 
@@ -74,6 +81,7 @@ int main() {
     printf("Entrez le temps maximal t_max : ");
     scanf("%lf", &t_max);
 
+    // etape "i"
     int steps = (int)(t_max / dt);
     FILE *data_file = fopen("test/simulation.dat", "w");
 
@@ -92,7 +100,7 @@ int main() {
     double t = 0.0;
     double prev_x = x, prev_y = y, prev_z = z;
 
-    
+    // etape "j"
     for (int i = 0; i <= steps; i++) {
     
         double dx = (x - prev_x) / dt;
@@ -121,6 +129,7 @@ int main() {
         t += dt;
     }
 
+    // etape "k"
     fclose(data_file);
     printf("Simulation terminée. Résultats dans 'test/simulation.dat'.\n");
 
