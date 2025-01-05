@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "dynamic_system.h"
 #include "lorenz.h"
 #include "van_der_pol.h"
 #include "oscillator.h"
-#include <math.h>
 
 int main() {
     struct LorenzParams *lorenz_params = (struct LorenzParams *)malloc(sizeof(struct LorenzParams));
@@ -25,7 +25,6 @@ int main() {
         return EXIT_FAILURE;
     }
 
-   
     systems[0].name = "Équations de Lorenz";
     systems[0].init_params = initialise_lorenz;
     systems[0].update = actualise_lorenz;
@@ -43,7 +42,6 @@ int main() {
 
     int num_systems = 3;
 
-    
     printf("Choisissez un système dynamique :\n");
     for (int i = 0; i < num_systems; i++) {
         printf("%d. %s\n", i + 1, systems[i].name);
@@ -88,22 +86,17 @@ int main() {
 
     double t = 0.0, prev_x = x, prev_y = y, prev_z = z;
 
-    
     for (int i = 0; i <= steps; i++) {
         system->update(system->params, &x, &y, &z, dt);
 
-       
         double dx = (x - prev_x) / dt;
         double dy = (y - prev_y) / dt;
         double dz = (z - prev_z) / dt;
-        
-        
-        double vitesse = sqrt(dx*dx + dy*dy + dz*dz);
+        double vitesse = sqrt(dx * dx + dy * dy + dz * dz);
 
-       
-        fprintf(data_file, "%lf %lf %lf %lf %lf %lf %lf %lf\n", t, x, y, z, dx, dy, dz, vitesse);
+        fprintf(data_file, "%lf %lf %lf %lf %lf %lf %lf %lf\n",
+                t, x, y, z, dx, dy, dz, vitesse);
 
-        
         prev_x = x;
         prev_y = y;
         prev_z = z;
@@ -113,7 +106,6 @@ int main() {
     fclose(data_file);
     printf("Simulation terminée. Résultats dans 'test/simulation.dat'.\n");
 
-   
     free(lorenz_params);
     free(van_der_pol_params);
     free(oscillator_params);
