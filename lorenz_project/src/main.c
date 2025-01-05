@@ -25,6 +25,7 @@ int main() {
         return EXIT_FAILURE;
     }
 
+    // Initialisation des systèmes
     systems[0].name = "Équations de Lorenz";
     systems[0].init_params = initialise_lorenz;
     systems[0].update = actualise_lorenz;
@@ -42,6 +43,7 @@ int main() {
 
     int num_systems = 3;
 
+    // Sélection du système dynamique
     printf("Choisissez un système dynamique :\n");
     for (int i = 0; i < num_systems; i++) {
         printf("%d. %s\n", i + 1, systems[i].name);
@@ -86,17 +88,28 @@ int main() {
 
     double t = 0.0, prev_x = x, prev_y = y, prev_z = z;
 
+    // Boucle principale pour générer les données
     for (int i = 0; i <= steps; i++) {
-        system->update(system->params, &x, &y, &z, dt);
-
+        // Calcul de la vitesse et des dérivées
         double dx = (x - prev_x) / dt;
         double dy = (y - prev_y) / dt;
         double dz = (z - prev_z) / dt;
         double vitesse = sqrt(dx * dx + dy * dy + dz * dz);
 
-        fprintf(data_file, "%lf %lf %lf %lf %lf %lf %lf %lf\n",
-                t, x, y, z, dx, dy, dz, vitesse);
+        // Écriture dans le fichier
+        if (fprintf(data_file, "%lf %lf %lf %lf %lf %lf %lf %lf\n", 
+                    t, x, y, z, dx, dy, dz, vitesse) < 0) {
+            fprintf(stderr, "Erreur d'écriture dans le fichier.\n");
+            fclose(data_file);
+            free(lorenz_params);
+            free(van_der_pol_params);
+            free(oscillator_params);
+            free(systems);
+            return EXIT_FAILURE;
+        }
 
+        // Mise à jour
+        system->update(system->params, &x, &y, &z, dt);
         prev_x = x;
         prev_y = y;
         prev_z = z;
@@ -106,6 +119,7 @@ int main() {
     fclose(data_file);
     printf("Simulation terminée. Résultats dans 'test/simulation.dat'.\n");
 
+    // Libération de la mémoire
     free(lorenz_params);
     free(van_der_pol_params);
     free(oscillator_params);
