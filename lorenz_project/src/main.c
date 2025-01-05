@@ -4,9 +4,9 @@
 #include "lorenz.h"
 #include "van_der_pol.h"
 #include "oscillator.h"
+#include <math.h>
 
 int main() {
-    
     struct LorenzParams *lorenz_params = (struct LorenzParams *)malloc(sizeof(struct LorenzParams));
     struct VanDerPolParams *van_der_pol_params = (struct VanDerPolParams *)malloc(sizeof(struct VanDerPolParams));
     struct OscillatorParams *oscillator_params = (struct OscillatorParams *)malloc(sizeof(struct OscillatorParams));
@@ -25,7 +25,7 @@ int main() {
         return EXIT_FAILURE;
     }
 
-    
+   
     systems[0].name = "Équations de Lorenz";
     systems[0].init_params = initialise_lorenz;
     systems[0].update = actualise_lorenz;
@@ -64,8 +64,7 @@ int main() {
     struct DynamicSystem *system = &systems[choice - 1];
     system->init_params(system->params);
 
-    
-    double x, y, z, dt, t_max, speed_factor;
+    double x, y, z, dt, t_max;
     printf("Entrez la position initiale (x y z) : ");
     scanf("%lf %lf %lf", &x, &y, &z);
 
@@ -75,17 +74,9 @@ int main() {
     printf("Entrez le temps maximal t_max : ");
     scanf("%lf", &t_max);
 
-   
-    printf("Entrez un facteur de vitesse de mise à jour (1 = normal, >1 pour accélérer, <1 pour ralentir) : ");
-    scanf("%lf", &speed_factor);
-
-    
-    dt *= speed_factor;
-
     int steps = (int)(t_max / dt);
-
-   
     FILE *data_file = fopen("test/simulation.dat", "w");
+
     if (!data_file) {
         fprintf(stderr, "Erreur : impossible de créer le fichier de sortie.\n");
         free(lorenz_params);
@@ -95,18 +86,34 @@ int main() {
         return EXIT_FAILURE;
     }
 
-  
-    double t = 0.0;
+    double t = 0.0, prev_x = x, prev_y = y, prev_z = z;
+
+    
     for (int i = 0; i <= steps; i++) {
-        fprintf(data_file, "%lf %lf %lf %lf\n", t, x, y, z);
         system->update(system->params, &x, &y, &z, dt);
+
+       
+        double dx = (x - prev_x) / dt;
+        double dy = (y - prev_y) / dt;
+        double dz = (z - prev_z) / dt;
+        
+        
+        double vitesse = sqrt(dx*dx + dy*dy + dz*dz);
+
+       
+        fprintf(data_file, "%lf %lf %lf %lf %lf\n", t, x, y, z, vitesse);
+
+        
+        prev_x = x;
+        prev_y = y;
+        prev_z = z;
         t += dt;
     }
 
     fclose(data_file);
     printf("Simulation terminée. Résultats dans 'test/simulation.dat'.\n");
 
-    
+   
     free(lorenz_params);
     free(van_der_pol_params);
     free(oscillator_params);
